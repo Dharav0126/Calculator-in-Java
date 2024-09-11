@@ -21,12 +21,16 @@ public class Calculator implements ActionListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 550);
         frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.DARK_GRAY);
+        frame.setLayout(new BorderLayout());  // Use BorderLayout for responsiveness
 
         //setting textfield setting
         textField = new JTextField();
         textField.setBounds(50,25,300,50);
         textField.setFont(myfont);
         textField.setEditable(false);
+        textField.setBackground(Color.BLACK);    // Background color
+        textField.setForeground(Color.GREEN);    // Text color
 
         //adding buttons
         addButton = new JButton("+");
@@ -53,6 +57,8 @@ public class Calculator implements ActionListener{
             funtionButtons[i].addActionListener(this);
             funtionButtons[i].setFont(myfont);
             funtionButtons[i].setFocusable(false); 
+            funtionButtons[i].setBackground(Color.LIGHT_GRAY);  // Button background
+            funtionButtons[i].setForeground(Color.BLUE);        // Button text color
         }
 
         for(int i=0; i<10;i++){
@@ -60,15 +66,19 @@ public class Calculator implements ActionListener{
             numberButtons[i].setFont(myfont);
             numberButtons[i].addActionListener(this);
             numberButtons[i].setFocusable(false); 
+            numberButtons[i].setBackground(Color.DARK_GRAY);    // Number button background
+            numberButtons[i].setForeground(Color.WHITE);        // Number button text color
         }
 
         negButton.setBounds(50, 430, 100, 50);
         delButton.setBounds(150, 430, 100, 50);
         clrButton.setBounds(250, 430, 100, 50);
-
+        
         panel = new JPanel();
         panel.setBounds(50, 100, 300, 300);
         panel.setLayout(new GridLayout(4,4,10,10));
+        panel.setBackground(Color.GRAY);  // Panel background color
+        panel.setLayout(new GridLayout(4, 4, 10, 10));  // 4x4 Grid with padding
         
         panel.add(numberButtons[1]);
         panel.add(numberButtons[2]);
@@ -99,9 +109,19 @@ public class Calculator implements ActionListener{
         frame.setVisible(true);
         // adding negbutton
         frame.add(negButton);
-    }
-    public static void main(String[] args) {
-    Calculator calc = new Calculator();
+
+        frame.add(textField, BorderLayout.NORTH);
+        frame.add(panel, BorderLayout.CENTER);
+         // Bottom panel for extra buttons (Delete, Clear, Negation)
+         JPanel bottomPanel = new JPanel();
+         bottomPanel.setLayout(new GridLayout(1, 3, 10, 10));
+         bottomPanel.add(negButton);
+         bottomPanel.add(delButton);
+         bottomPanel.add(clrButton);
+         frame.add(bottomPanel, BorderLayout.SOUTH);
+        }
+        public static void main(String[] args) {
+            Calculator calc = new Calculator();
     }
 
     @Override
